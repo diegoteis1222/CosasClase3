@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh;
+            flex-direction: column;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        input {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 12%;
+        }
+
+        button:hover {
+            background-color: orangered;
+        }
+
+        div#resultado {
+            color: orangered;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+        <h1>Calculadora de Mierda</h1>
+
+        <input type"number" id="numero1" placeholder="Ingrese un numero">
+        <input type="number" id="numero2" placeholder="Ingrese otro numero">
+
+        <button id="btnCalcular">Calcular</button>
+
+        <div id="resultado">AAAAAAAAAAAAAAAH</div>
+
+    </main>
+
+    <script>
+        // Seleccionamos el botón por su ID y le añadimos un listener de evento 'click'
+        document.getElementById('btnCalcular').addEventListener('click', function () {
+
+            // Obtenemos el valor del primer input y lo convertimos a número decimal
+            const num1 = parseFloat(document.getElementById('numero1').value);
+
+            // Obtenemos el valor del segundo input y lo convertimos a número decimal
+            const num2 = parseFloat(document.getElementById('numero2').value);
+
+            // Validamos que ambos valores sean números válidos
+            if (isNaN(num1) || isNaN(num2)) {
+                // Si alguno no es número, mostramos un mensaje de error en el div 'resultado'
+                document.getElementById('resultado').textContent = 'Por favor, ingrese números válidos.';
+                return; // Salimos de la función para que no se ejecute el cálculo
+            }
+
+            // Calculamos la suma de los dos números
+            const suma = num1 + num2;
+
+            // Mostramos el resultado en el div 'resultado'
+            // Concatenamos la suma con un texto extra "AAAAAAAAAAAAAAAH"
+            document.getElementById('resultado').textContent = 'Resultado: ' + suma + " AAAAAAAAAAAAAAAAH";
+        });
+    </script>
+</body>
+
+</html>

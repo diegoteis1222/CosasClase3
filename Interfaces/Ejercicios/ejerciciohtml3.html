@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background-color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 50px 20px;
+    }
+
+    .save {
+      background-color: #fff;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    input[type="text"] {
+      padding: 10px 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    div>div:nth-child(n+2) {
+      background-color: #fff;
+      padding: 15px 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      margin-bottom: 15px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    div>div:nth-child(n+2)>div:first-child {
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    #local,
+    #sesion,
+    #galletas {
+      font-size: 16px;
+      color: #555;
+      padding: 5px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="save">
+    <input id="texto" type="text" placeholder="algo" />
+    <button id="boton">Guardar en local</button>
+    <button id="boton2">Guardar en sesion</button>
+    <button id="boton3">Guardar en galletas</button>
+  </div>
+
+  <div>
+    <div>Info guardada en: </div>
+    <div>Local: <div id="local"></div>
+    </div>
+    <div>Sesion: <div id="sesion"></div>
+    </div>
+    <div>Galletas: <div id="galletas"></div>
+    </div>
+  </div>
+
+  <script>
+    // ======================
+    // Función para obtener el valor de una cookie por su nombre
+    // ======================
+    function getCookie(name) {
+      // Separamos todas las cookies del documento en un array
+      const cookies = document.cookie.split('; ');
+
+      // Recorremos cada cookie
+      for (let cookie of cookies) {
+        // Separamos nombre y valor
+        const [key, value] = cookie.split('=');
+
+        // Si el nombre coincide, devolvemos el valor decodificado
+        if (key === name) {
+          return decodeURIComponent(value);
+        }
+      }
+
+      // Si no encontramos la cookie, devolvemos null
+      return null;
+    }
+
+    // ======================
+    // Referencias a los elementos del DOM
+    // ======================
+    const input = document.getElementById('texto'); // Input de texto
+    const out1 = document.getElementById('local'); // Div para localStorage
+    const out2 = document.getElementById('sesion'); // Div para sessionStorage
+    const out3 = document.getElementById('galletas'); // Div para cookies
+
+    // ======================
+    // Mostrar información guardada al cargar la página
+    // ======================
+    // Si no hay datos, mostramos "vacio"
+    out1.textContent = localStorage.getItem('info') ?? 'vacio';
+    out2.textContent = sessionStorage.getItem('info') ?? 'vacio';
+    out3.textContent = getCookie('info') ?? 'vacio';
+
+    // ======================
+    // Evento para guardar en localStorage
+    // ======================
+    document.getElementById('boton').addEventListener('click', () => {
+      const texto = input.value; // Tomamos el valor del input
+      localStorage.setItem('info', texto); // Guardamos en localStorage
+      out1.textContent = texto; // Mostramos en pantalla
+    });
+
+    // ======================
+    // Evento para guardar en sessionStorage
+    // ======================
+    document.getElementById('boton2').addEventListener('click', () => {
+      const texto = input.value; // Tomamos el valor del input
+      sessionStorage.setItem('info', texto); // Guardamos en sessionStorage
+      out2.textContent = texto; // Mostramos en pantalla
+    });
+
+    // ======================
+    // Evento para guardar en cookies
+    // ======================
+    document.getElementById('boton3').addEventListener('click', () => {
+      const texto = input.value; // Tomamos el valor del input
+      // Creamos una cookie con nombre "info", codificando el valor
+      // Establecemos path=/ para que sea accesible en toda la web
+      // y expiración el 31 de diciembre de 2025
+      document.cookie = `info=${encodeURIComponent(texto)}; path=/; expires=31 Dec 2025 23:59:59 GMT`;
+
+      out3.textContent = texto; // Mostramos en pantalla
+    });
+
+  </script>
+</body>
+
+</html>
