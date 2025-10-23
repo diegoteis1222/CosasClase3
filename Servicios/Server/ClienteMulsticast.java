@@ -16,7 +16,7 @@ public class ClienteMulsticast {
 
         String msg = "";
 
-        while (!msg.trim.equalsIgnoreCase("salir")) {
+        while (!msg.trim().equalsIgnoreCase("salir")) {
             byte[] buf = new byte[1024];
 
             DatagramPacket paquete = new DatagramPacket(buf, buf.length, grupo, port);
