@@ -1,4 +1,4 @@
-package DimeHora;
+package ServerHora;
 
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -21,20 +21,14 @@ public class MulticastHoraServer {
 
         while (true) {
 
-            try {
+            Thread.sleep(5000);
 
-                Thread.sleep(5000);
+            byte[] buf = new byte[1024];
+            buf = obtenerHora().getBytes();
 
-                byte[] buf = new byte[1024];
-                buf = obtenerHora().getBytes();
+            DatagramPacket dp = new DatagramPacket(buf, buf.length, grupo, puerto);
 
-                DatagramPacket dp = new DatagramPacket(buf, buf.length, grupo, puerto);
-
-                ms.send(dp);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            ms.send(dp);
 
         }
 

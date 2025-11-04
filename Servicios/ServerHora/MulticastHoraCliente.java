@@ -1,4 +1,4 @@
-package DimeHora;
+package ServerHora;
 
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -19,30 +19,31 @@ public class MulticastHoraCliente {
 
         ms.joinGroup(grupo);
         String mensaje = "";
-        boolean corte = false;
 
-        System.out.println("Cliente unido al grupo y recibiendo la pinche hora: ");
+        System.out.println("Cliente unido al grupo y recibiendo la pinche hora cada 5 segundos: ");
 
-        while (!corte) {
+        while (true) {
 
-            byte[] buf = new byte[1024];
-            DatagramPacket dp = new DatagramPacket(buf, buf.length, grupo, puerto);
-            ms.receive(dp);
+            try {
+                Thread.sleep(5000);
 
-            mensaje = new String(dp.getData(), 0, dp.getLength());
+                byte[] buf = new byte[1024];
+                DatagramPacket dp = new DatagramPacket(buf, buf.length, grupo, puerto);
+                ms.receive(dp);
 
-            System.out.println("recibido: " + mensaje);
-            System.out.println("Seguir: S/N");
+                mensaje = new String(dp.getData(), 0, dp.getLength());
 
-            char respuesta = sc.nextLine().toLowerCase().trim().charAt(0);
-
-            if (respuesta == 'n') {
-                corte = !corte;
+                System.out.println("recibido: " + mensaje);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+
+            //System.out.println("Seguir: S/N");
+            //char respuesta = sc.nextLine().toLowerCase().trim().charAt(0);
         }
 
-        ms.leaveGroup(grupo);
-        ms.close();
-        sc.close();
+        // ms.leaveGroup(grupo);
+        // ms.close();
+        // sc.close();
     }
 }
