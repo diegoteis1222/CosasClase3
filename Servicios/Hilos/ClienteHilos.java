@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -8,34 +7,45 @@ public class ClienteHilos {
 
     public static void main(String[] args) {
 
-        String host = "localhost"; // o IP del servidor
-        int puerto = 1234;         // mismo puerto del servidor
+        String host = "localhost";
+        int puerto = 1234;
 
-        //try con recursos
         try (
-                Socket socket = new Socket(host, puerto); PrintWriter salida = new PrintWriter(socket.getOutputStream(), true); BufferedReader entrada = new BufferedReader(new InputStreamReader(socket.getInputStream())); BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));) {
-            String mensaje;
-            System.out.println("Conectado al servidor. Escribe mensajes para enviar ( quit para salir ):");
+                Socket socket = new Socket(host, puerto);
+                PrintWriter salida = new PrintWriter(socket.getOutputStream(), true);
+                BufferedReader entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+        ) {
+            System.out.println("Conectado al servidor. Escribe mensajes para enviar (o 'quit' para salir):");
+            String mensajeUsuario;
 
             while (true) {
                 System.out.print("Mensaje: ");
-                mensaje = teclado.readLine();
+                mensajeUsuario = teclado.readLine();
 
-                salida.println(mensaje);  // enviamos mensaje al servidor
+                if (mensajeUsuario == null) {
+                    break;
+                }
+                
+                salida.println(mensajeUsuario);
 
-                if (mensaje.trim().equals("quit")) {
-                    System.out.println("Fin de transmisión.");
+                if ("quit".equalsIgnoreCase(mensajeUsuario.trim())) {
+                    System.out.println("Fin de la transmisión.");
                     break;
                 }
 
-                // Leemos respuesta del servidor y mostramos
-                String respuesta = entrada.readLine();
-                System.out.println("Respuesta del servidor: " + respuesta);
+                String respuestaServidor = entrada.readLine();
+                
+                if (respuestaServidor != null) {
+                    System.out.println("Respuesta del servidor: " + respuestaServidor);
+                } else {
+                    System.out.println("El servidor ha cerrado la conexión.");
+                    break;
+                }
             }
 
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            System.err.println("Error en el cliente: " + e.getMessage());
         }
     }
-
 }
