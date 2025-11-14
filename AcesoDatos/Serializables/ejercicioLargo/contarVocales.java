@@ -1,6 +1,6 @@
 
 import java.awt.Container;
-import java.awt.event.ActionEvent; // Import para poder cambiar la fuente
+import java.awt.event.ActionEvent; 
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,14 +21,14 @@ public class contarVocales extends JFrame implements ActionListener {
     private JButton contarButton;
     private JButton seleccionarButton;
     private JTextArea rutaArchivo;
-    private JLabel aLabel, eLabel, iLabel, oLabel, uLabel; // Etiquetas para "A:", "E:", etc.
-    private JTextArea aCount, eCount, iCount, oCount, uCount; // Areas de texto para los números
+    private JLabel aLabel, eLabel, iLabel, oLabel, uLabel; 
+    private JTextArea aCount, eCount, iCount, oCount, uCount; 
     private JScrollPane scrollPane;
 
     public contarVocales() {
         inicio();
         setTitle("Contador de Vocales");
-        setSize(580, 420); // Ajustamos el tamaño de la ventana
+        setSize(580, 420); 
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
