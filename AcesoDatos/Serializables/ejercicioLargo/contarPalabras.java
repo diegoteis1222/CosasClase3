@@ -30,7 +30,7 @@ public class contarPalabras extends JFrame implements ActionListener {
         setTitle("Contador de Vocales");
         setSize(580, 420); 
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     public void inicio() {
@@ -109,10 +109,5 @@ public class contarPalabras extends JFrame implements ActionListener {
                 cantidadPalabras.setText(String.valueOf(palabras.length));
             }
         }
-    }
-
-    public static void main(String[] args) {
-        contarPalabras cp = new contarPalabras();
-        cp.setVisible(true);
     }
 }

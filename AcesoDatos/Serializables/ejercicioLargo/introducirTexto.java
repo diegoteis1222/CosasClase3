@@ -25,7 +25,7 @@ public class introducirTexto extends JFrame implements ActionListener {
         setTitle("MeteTextos");
         setSize(600, 500);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     public void inicio() {
@@ -73,10 +73,4 @@ public class introducirTexto extends JFrame implements ActionListener {
             }
         }
     }
-
-    public static void main(String[] args) {
-        introducirTexto it = new introducirTexto();
-        it.setVisible(true);
-    }
-
 }

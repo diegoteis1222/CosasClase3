@@ -30,7 +30,7 @@ public class contarVocales extends JFrame implements ActionListener {
         setTitle("Contador de Vocales");
         setSize(580, 420); 
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     public void inicio() {
@@ -175,10 +175,5 @@ public class contarVocales extends JFrame implements ActionListener {
             oCount.setText(String.valueOf(contadorO));
             uCount.setText(String.valueOf(contadorU));
         }
-    }
-
-    public static void main(String[] args) {
-        contarVocales cv = new contarVocales();
-        cv.setVisible(true);
     }
 }

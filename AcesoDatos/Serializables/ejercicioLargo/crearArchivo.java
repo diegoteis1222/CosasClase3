@@ -22,7 +22,8 @@ public class crearArchivo extends JFrame implements ActionListener {
         setTitle("Creador de Archivos");
         setSize(300, 300);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
     }
 
     public void inicio() {
@@ -66,12 +67,5 @@ public class crearArchivo extends JFrame implements ActionListener {
                 ex.printStackTrace();
             }
         }
-    }
-
-    public static void main(String[] args) {
-
-        //Test
-        crearArchivo ca = new crearArchivo();
-        ca.setVisible(true);
     }
 }
